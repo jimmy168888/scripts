@@ -51,24 +51,10 @@
                 }
             });
         }
-
-        window.onload = () => {
+        window.addEventListener('load', () => {
             removeBlacklist();
-
-            let hanlder = setInterval(() => {
-                const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
-                if(ctrlWideBtn === undefined){
-                    clearInterval(hanlder);
-                    return;
-                }
-                if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1){
-                    ctrlWideBtn.click();
-                    clearInterval(hanlder);
-                }
-            }, 1000);
-        }
-
+        });
     }catch(e){
-        console.error("#B", e);
+        console.log("#B", e);
     }
 })();
