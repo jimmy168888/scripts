@@ -11,18 +11,14 @@
 
 (function() {
     'use strict';
-    window.onload = () => {
+
+    window.addEventListener('load', () => {
         let hanlder = setInterval(() => {
-            const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
-            if(ctrlWideBtn === undefined){
-                clearInterval(hanlder);
-                return;
-            }
+            const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-web')[0];
             if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1){
                 ctrlWideBtn.click();
                 clearInterval(hanlder);
             }
-        }, 1000);
-    }
-    // Your code here...
+        });
+    });
 })();
