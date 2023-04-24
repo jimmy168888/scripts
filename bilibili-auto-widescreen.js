@@ -14,11 +14,11 @@
 
     window.addEventListener('load', () => {
         let hanlder = setInterval(() => {
-            const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-web')[0];
+            const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
             if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1){
                 ctrlWideBtn.click();
                 clearInterval(hanlder);
             }
-        });
+        }, 2000);
     });
 })();
