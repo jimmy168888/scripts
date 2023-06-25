@@ -12,13 +12,24 @@
 (function() {
     'use strict';
 
+    const sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    async function ctrlWideLoop() {
+        const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
+        if(!ctrlWideBtn){
+            await sleep(200);
+            ctrlWideLoop();
+        }
+        if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1) {
+            ctrlWideBtn.click();
+            return;
+        }
+    }
+
+
     window.addEventListener('load', () => {
-        let hanlder = setInterval(() => {
-            const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
-            if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1){
-                ctrlWideBtn.click();
-                clearInterval(hanlder);
-            }
-        }, 2000);
+        ctrlWideLoop();
     });
 })();
