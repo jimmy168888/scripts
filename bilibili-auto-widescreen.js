@@ -1,12 +1,11 @@
 // ==UserScript==
-// @name         自动宽屏
+// @name         bilibili - 自动宽屏
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  自动宽屏
-// @author       Joe
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
 // @match        https://www.bilibili.com/video/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bilibili.com
-// @run-at      document-start
 // @grant        none
 // ==/UserScript==
 
@@ -19,6 +18,7 @@
 
     async function ctrlWideLoop() {
         const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
+        //const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-web')[0];
         if(!ctrlWideBtn){
             await sleep(0);
             ctrlWideLoop();
