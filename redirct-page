@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Redirct Page
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0
 // @description  try to take over the world!
 // @author       You
-// @match        https://tieba.baidu.com/*
+// @match        https://*.baidu.com/*
 // @match        https://*.bilibili.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bilibili.com
 // @grant        none
@@ -12,17 +12,35 @@
 
 (function() {
     'use strict';
-
-    // Your code here...
-    window.addEventListener("click", (e) => {
-        let node = e.target;
-        while(node.tagName !== "body") {
-            if(node.href){
-                node.target = "";
+    const handleClick = (e) => {
+        console.log("###", e);
+        try{
+            if(e.target.href){
+                e.target.target = "";
                 return;
             }
-            node = node.parentNode
+            let node = e.target;
+            while(node?.tagName !== "body") {
+                if(node.href){
+                    node.target = "";
+                    return;
+                }
+                node = node.parentNode
+            }
+        }catch(err){
+            console.log("###",err);
         }
+    }
 
+    const clickableElements = document.querySelectorAll('[data-click]');
+    clickableElements.forEach(element => {
+        element.addEventListener('click', handleClick);
     });
+
+    document.querySelectorAll('[href]').forEach(element => {
+        element.addEventListener('click', handleClick);
+    });
+
+    // Your code here...
+    window.addEventListener("click", handleClick);
 })();
