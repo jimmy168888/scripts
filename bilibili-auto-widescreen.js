@@ -4,7 +4,7 @@
 // @version      1.1
 // @description  自动点击宽屏按钮
 // @author       You
-// @match        https://www.bilibili.com/video/*
+//@match        *://www.bilibili.com/video/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bilibili.com
 // @grant        none
 // ==/UserScript==
