@@ -1,35 +1,32 @@
 // ==UserScript==
-// @name         bilibili - 自动宽屏优化版
+// @name         bilibili - 自动宽屏（稳定版）
 // @namespace    http://tampermonkey.net/
-// @version      1.1
-// @description  自动点击宽屏按钮
-// @author       You
-//@match        *://www.bilibili.com/video/*
+// @version      2.0
+// @description  自动进入宽屏
+// @match        *://www.bilibili.com/video/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bilibili.com
+// @run-at       document-end
 // @grant        none
 // ==/UserScript==
 
-(function () {
+(function() {
     'use strict';
 
-    const WIDE_BTN_SELECTORS = [
-        '.bpx-player-ctrl-wide', // 新版宽屏按钮
-        '.bpx-player-ctrl-web',  // 旧版网页全屏按钮
-    ];
+    const sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
 
-    let tries = 0;
-    const maxTry = 50;
-
-    const timer = setInterval(() => {
-        tries++;
-        const btn = document.querySelector(WIDE_BTN_SELECTORS.join(','));
-        if (!btn) {
-            if (tries >= maxTry) clearInterval(timer);
+    async function ctrlWideLoop() {
+        const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-wide')[0];
+        //const ctrlWideBtn = document.getElementsByClassName('bpx-player-ctrl-web')[0];
+        if(!ctrlWideBtn){
+            await sleep(0);
+            ctrlWideLoop();
+        }else if([...ctrlWideBtn.classList].indexOf('bpx-state-entered') === -1) {
+            ctrlWideBtn.click();
             return;
         }
-        if (!btn.classList.contains('bpx-state-entered')) {
-            btn.click();
-        }
-        clearInterval(timer);
-    }, 200);
+    }
+
+    ctrlWideLoop();
 })();
